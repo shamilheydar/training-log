@@ -73,7 +73,7 @@ a{color:var(--accent)}
 }
 .resume b{font-family:var(--display);font-size:17px;text-transform:uppercase;display:block}
 .resume span{display:block;font-size:13px;color:var(--dim)}
-.resume .btn{margin-left:auto}
+.resume-acts{margin-left:auto;display:flex;gap:7px;flex:0 0 auto}
 
 .sect{margin:26px 0 0}
 .sect > h2{font-size:14px;font-family:var(--ui);font-weight:600;color:var(--dim);margin-bottom:10px}
@@ -93,7 +93,11 @@ a{color:var(--accent)}
   flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:var(--accent);
   display:grid;place-items:center;color:#0c0f13;font-size:15px
 }
-.day-card .last{margin-top:7px;font-family:var(--num);font-size:11px;color:var(--dimmer)}
+.day-card .last{margin-top:7px;font-family:var(--num);font-size:11px;color:var(--dimmer);display:block}
+.day-card .see{display:block;margin-top:5px;font-size:12.5px;font-weight:600;color:var(--accent)}
+.resume-acts{margin-left:auto;display:flex;gap:7px;flex:0 0 auto}
+.resume .btn-ghost{padding:11px 13px}
+#buildstamp{display:block;margin-top:8px;font-family:var(--num);font-size:11px;color:var(--edge)}
 
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .stat{border:1px solid var(--edge);border-radius:11px;background:var(--mat-2);padding:11px 12px}
@@ -220,6 +224,7 @@ footer.legal{margin:30px 0 0;padding:16px 0 calc(34px + var(--safeb));border-top
 }
 .field input::-webkit-outer-spin-button,.field input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .field input[type=number]{-moz-appearance:textfield}
+.field input{border-radius:9px}
 .field input::placeholder{color:var(--dimmer);font-weight:500}
 .tick{
   width:52px;height:48px;border-radius:9px;background:var(--mat-3);border:1px solid var(--edge);
@@ -233,6 +238,7 @@ footer.legal{margin:30px 0 0;padding:16px 0 calc(34px + var(--safeb));border-top
   padding:8px 12px;font-size:12.5px;font-weight:600;color:var(--dim);min-height:38px;display:inline-flex;align-items:center;gap:5px
 }
 .chip:active{transform:scale(.97)}
+.chip.off{opacity:.4}
 .chip b{font-family:var(--num);color:var(--chalk)}
 
 /* disclosure */
@@ -369,7 +375,10 @@ details .inner{padding:0 14px 14px;font-size:14.5px;color:var(--dim);line-height
         <b id="resume-title">Workout in progress</b>
         <span id="resume-sub"></span>
       </div>
-      <button class="btn" data-act="resume">Resume</button>
+      <div class="resume-acts">
+        <button class="btn-ghost" data-act="clear-active">Clear</button>
+        <button class="btn" data-act="resume">Resume</button>
+      </div>
     </div>
 
     <div class="sect">
@@ -393,6 +402,7 @@ details .inner{padding:0 14px 14px;font-size:14.5px;color:var(--dim);line-height
     <footer class="legal">
       Everything you log lives in this browser only. Nothing is uploaded. Export a backup before you
       switch phones or clear your browsing data.
+      <span id="buildstamp"></span>
     </footer>
   </div>
 </section>
@@ -484,6 +494,13 @@ var esc = function (s) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
   });
 };
+var cleanNum = function (v, decimals) {
+  v = String(v).replace(/[^0-9.,]/g, '');
+  if (!decimals) { var cut = v.search(/[.,]/); return cut < 0 ? v : v.slice(0, cut); }
+  var at = v.search(/[.,]/);
+  if (at < 0) return v;
+  return v.slice(0, at + 1) + v.slice(at + 1).replace(/[.,]/g, '');
+};
 var num = function (v) { var n = parseFloat(String(v).replace(',', '.')); return isFinite(n) ? n : 0; };
 var round = function (n, p) { var f = Math.pow(10, p || 0); return Math.round(n * f) / f; };
 var fmt = function (n) { return round(n, 1).toLocaleString(undefined, { maximumFractionDigits: 1 }); };
@@ -523,6 +540,7 @@ function fail(msg, err) {
      none   — memory only. The app still runs; it shouts, and it hands you a
               backup file the moment a workout is saved.
 ──────────────────────────────────────────────────────────────── */
+var BUILD = 6;
 var KEY = 'shamil.traininglog.v2';
 var OLD = 'shamilWorkoutOS:v1';
 
@@ -769,8 +787,8 @@ function renderHome() {
         '<span class="n">' + esc(d.kicker) + '</span>' +
         '<h3>' + esc(d.title) + '</h3>' +
         '<p>' + esc(d.sub) + '</p>' +
-        '<span class="last">' + (isActive ? 'in progress' : when ? 'last trained ' + ago(when) : 'not trained yet') +
-        ' · ' + d.ex.length + ' exercises</span>' +
+        '<span class="last">' + (isActive ? 'in progress' : when ? 'last trained ' + ago(when) : 'not trained yet') + '</span>' +
+        '<span class="see">See the ' + d.ex.length + ' exercises &#8250;</span>' +
       '</button>' +
       '<button class="go" data-act="start" data-day="' + d.id + '" aria-label="Start ' + esc(d.title) + ' now">&#9654;</button>' +
       '</div>';
@@ -788,14 +806,22 @@ function renderHome() {
   var r = $('#resume');
   if (state.active) {
     var d = dayById[state.active.dayId], c = doneCount(state.active);
+    var hours = (Date.now() - new Date(state.active.startedAt).getTime()) / 36e5;
     r.classList.remove('hide');
     r.setAttribute('data-color', d ? d.color : 'blue');
-    $('#resume-title').textContent = d ? d.title : 'Workout';
-    $('#resume-sub').textContent = c.done + ' of ' + c.total + ' sets done · started ' + ago(state.active.startedAt);
+    $('#resume-title').textContent = (hours > 12 ? 'Unfinished: ' : '') + (d ? d.title : 'Workout');
+    $('#resume-sub').textContent = hours > 12
+      ? c.done + ' of ' + c.total + ' sets, started ' + ago(state.active.startedAt) + ' — finish it or clear it'
+      : c.done + ' of ' + c.total + ' sets done · started ' + ago(state.active.startedAt);
   } else {
     r.classList.add('hide');
   }
 }
+function paintBuild() {
+  var el = $('#buildstamp');
+  if (el) el.textContent = 'Build ' + BUILD + ' · ' + storageLabel();
+}
+
 function stat(label, value) {
   return '<div class="stat"><span>' + esc(label) + '</span><b>' + value + '</b></div>';
 }
@@ -973,7 +999,8 @@ function renderExercise() {
     '<div class="sets" id="sets"></div>' +
     '<div class="nudge">' +
       (prev ? '<button class="chip" data-act="copylast">Repeat last</button>' : '') +
-      '<button class="chip" data-act="addset">Add a set</button>' +
+      '<button class="chip' + (e.sets.every(function (x) { return x.done; }) ? '' : ' off') +
+        '" data-act="addset">Add a set</button>' +
       (/barbell|bench|squat|row|curl/i.test(def.name) ? '<button class="chip" data-act="plates">Plate maths</button>' : '') +
     '</div>' +
     '<div class="more">' +
@@ -1000,6 +1027,11 @@ function renderExercise() {
   $('[data-act=next]').textContent = cur === d.ex.length - 1 ? 'Finish workout' : 'Next exercise';
 }
 
+function refreshAddSet(e) {
+  var chip = $('[data-act=addset]');
+  if (chip) chip.classList.toggle('off', !e.sets.every(function (x) { return x.done; }));
+}
+
 function renderSets(def, e, prev) {
   var wrap = $('#sets');
   var nextIdx = -1;
@@ -1010,15 +1042,18 @@ function renderSets(def, e, prev) {
     return '<div class="set' + (s.done ? ' done' : '') + (i === nextIdx ? ' now' : '') + '" data-i="' + i + '">' +
       '<span class="idx">' + (i + 1) + '</span>' +
       '<span class="field"><label>KG</label>' +
-        '<input class="kg" type="number" inputmode="decimal" step="0.5" min="0" max="999" ' +
+        '<input class="kg" type="text" inputmode="decimal" enterkeyhint="next" ' +
+        'autocomplete="off" autocorrect="off" spellcheck="false" maxlength="6" ' +
         'placeholder="' + (p && p.kg ? esc(p.kg) : '–') + '" value="' + esc(s.kg) + '"></span>' +
       '<span class="field"><label>' + unit + '</label>' +
-        '<input class="reps" type="number" inputmode="numeric" step="1" min="0" max="999" ' +
+        '<input class="reps" type="text" inputmode="numeric" enterkeyhint="done" ' +
+        'autocomplete="off" autocorrect="off" spellcheck="false" maxlength="3" ' +
         'placeholder="' + (p && p.reps ? esc(p.reps) : esc(def.target || '–')) + '" value="' + esc(s.reps) + '"></span>' +
       '<button class="tick" data-act="tick" data-i="' + i + '" aria-pressed="' + (s.done ? 'true' : 'false') +
         '" aria-label="Mark set ' + (i + 1) + ' done">&#10003;</button>' +
       '</div>';
   }).join('');
+  refreshAddSet(e);
 }
 
 function currentDef() { return dayById[state.active.dayId].ex[cur]; }
@@ -1029,8 +1064,8 @@ function readInputs() {
   $$('#sets .set').forEach(function (row) {
     var i = +row.getAttribute('data-i');
     if (!e.sets[i]) return;
-    e.sets[i].kg = $('.kg', row).value;
-    e.sets[i].reps = $('.reps', row).value;
+    e.sets[i].kg = String($('.kg', row).value).replace(',', '.');
+    e.sets[i].reps = String($('.reps', row).value).replace(/[^0-9]/g, '');
   });
   var n = $('#exnote');
   if (n) e.note = n.value;
@@ -1090,6 +1125,11 @@ function copyLast() {
 function addSet() {
   readInputs();
   var def = currentDef(), e = ensure(def.key);
+  var open = e.sets.filter(function (x) { return !x.done; }).length;
+  if (open) {
+    toast(open === 1 ? 'Log your last set first' : 'Log the ' + open + ' sets you already have first');
+    return;
+  }
   var last = e.sets[e.sets.length - 1] || { kg: '', reps: '' };
   e.sets.push({ kg: last.kg, reps: '', rir: '', done: false });
   save();
@@ -1260,7 +1300,28 @@ function sessionSheet(id) {
       '<div class="sumcard"><span>Sets</span><b>' + c.done + '/' + c.total + '</b></div>' +
       '<div class="sumcard"><span>Volume</span><b>' + fmt(volumeOf(ss)) + '<small> kg</small></b></div>' +
     '</div>' +
-    (blocks || '<div class="empty">No sets were completed in this session.</div>'));
+    (blocks || '<div class="empty">No sets were completed in this session.</div>') +
+    '<div class="rowbtns" style="margin-top:18px">' +
+      '<button class="btn-danger" data-act="del-session" data-id="' + esc(ss.id) + '">Delete this workout</button>' +
+    '</div>');
+}
+
+function deleteSession(id) {
+  var ss = null;
+  state.sessions.forEach(function (x) { if (x.id === id) ss = x; });
+  if (!ss) return;
+  var d = dayById[ss.dayId], c = doneCount(ss);
+  confirmSheet('Delete this workout?',
+    '<b>' + esc(d ? d.title : 'Workout') + '</b> from ' + dayLabel(ss.endedAt || ss.startedAt) +
+    ', with ' + c.done + ' logged set' + (c.done === 1 ? '' : 's') + '. This cannot be undone, and the numbers ' +
+    'stop counting as your previous session for those lifts.',
+    'Delete it', function () {
+      state.sessions = state.sessions.filter(function (x) { return x.id !== id; });
+      save(true);
+      renderHome();
+      historySheet();
+      toast('Workout deleted');
+    });
 }
 
 function exerciseSheet(key) {
@@ -1315,8 +1376,8 @@ function historySheet() {
 function platesSheet(prefill) {
   sheet('Plate maths',
     '<div class="pgrid">' +
-      '<span class="field"><label>TARGET KG</label><input id="p-target" type="number" inputmode="decimal" step="0.5" min="0" value="' + esc(prefill || '') + '" placeholder="80"></span>' +
-      '<span class="field"><label>BAR KG</label><input id="p-bar" type="number" inputmode="decimal" step="0.5" min="0" value="20"></span>' +
+      '<span class="field"><label>TARGET KG</label><input id="p-target" type="text" inputmode="decimal" autocomplete="off" maxlength="6" value="' + esc(prefill || '') + '" placeholder="80"></span>' +
+      '<span class="field"><label>BAR KG</label><input id="p-bar" type="text" inputmode="decimal" autocomplete="off" maxlength="6" value="20"></span>' +
     '</div><div id="p-out"></div>');
   var calc = function () {
     var t = num($('#p-target').value), b = num($('#p-bar').value), out = $('#p-out');
@@ -1359,6 +1420,7 @@ function backupSheet() {
       '<button class="btn-ghost" data-act="import">Load a copy</button>' +
     '</div>' +
     '<div class="rowbtns"><button class="btn-ghost" data-act="sound">Rest sound: ' + (state.prefs.sound ? 'on' : 'off') + '</button></div>' +
+    '<p style="margin-top:14px">Build ' + BUILD + ' · ' + storageLabel() + '</p>' +
     '<input id="importer" type="file" accept="application/json,.json" style="display:none">');
   $('#importer').addEventListener('change', doImport);
 }
@@ -1465,8 +1527,15 @@ document.addEventListener('click', function (ev) {
       case 'plan-start': startDay(planDay); break;
       case 'plan-jump':  var k = t.getAttribute('data-key'); exerciseSheet(k); break;
       case 'session':    sessionSheet(t.getAttribute('data-id')); break;
+      case 'del-session': deleteSession(t.getAttribute('data-id')); break;
       case 'exhist':     exerciseSheet(t.getAttribute('data-key')); break;
       case 'resume':     ev.preventDefault(); cur = firstUndone(); openSession(); break;
+      case 'clear-active':
+        confirmSheet('Clear this workout?',
+          'It has <b>' + doneCount(state.active).done + '</b> sets logged. Clearing throws them away — ' +
+          'resume and finish it instead if you want them in your history.',
+          'Clear it', function () { state.active = null; save(true); closeSheet(); renderHome(); toast('Cleared'); });
+        break;
       case 'leave':      readInputs(); save(true); leaveSession(); break;
       case 'tick':       tickSet(+t.getAttribute('data-i')); break;
       case 'copylast':   copyLast(); break;
@@ -1499,8 +1568,21 @@ document.addEventListener('click', function (ev) {
 
 /* keep typed values without waiting for blur */
 document.addEventListener('input', function (ev) {
+  var t = ev.target;
+
+  /* strip anything that is not a number, and allow one separator on weights */
+  if (t.matches && t.matches('.kg, .reps, #p-target, #p-bar')) {
+    var decimals = !t.classList.contains('reps');
+    var clean = cleanNum(t.value, decimals);
+    if (clean !== t.value) {
+      var end = t.selectionStart === t.value.length;
+      t.value = clean;
+      if (end) { try { t.setSelectionRange(clean.length, clean.length); } catch (e) {} }
+    }
+  }
+
   if (!state.active) return;
-  if (ev.target.matches('#sets input, #exnote')) { readInputs(); save(); renderMeta(); }
+  if (t.matches('#sets input, #exnote')) { readInputs(); save(); renderMeta(); }
 });
 
 $('#sheet').addEventListener('click', function (ev) { if (ev.target === this) closeSheet(); });
@@ -1541,7 +1623,9 @@ try {
       storageWarning();
       askToPersist();
       renderHome();
-      if (state.active) { cur = firstUndone(); openSession(); }
+      paintBuild();
+      /* deliberately does NOT open the session: an unfinished workout
+         should be an offer on the home screen, not a hijacked launch */
     } catch (err) {
       fail('The app could not start. Reload the page, and if it keeps happening send this file back to me.', err);
     }

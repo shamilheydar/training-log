@@ -1,6 +1,6 @@
 /* Training log - offline shell.
    Bump CACHE when index.html changes so phones pick the new build up. */
-var CACHE = 'traininglog-v3';
+var CACHE = 'traininglog-v6';
 var SHELL = ['./', './index.html', './program.js', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
