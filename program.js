@@ -1,7 +1,12 @@
 /* THE PLAN. Edit this file to change your programme.
    Each exercise: name, rx (the prescription, 'N sets x A-B reps'),
    rest, fr (image frame ids - leave alone or set to null), cue, swaps.
-   After editing, bump CACHE in sw.js so installed phones fetch it. */
+   After editing, bump CACHE in sw.js so installed phones fetch it.
+
+   BACK-SAFE VERSION (Oct 2026) - Th11-12 disc herniation.
+   No axial loading (squats, standing barbell work), no loaded spinal
+   bending (rows without a chest pad, deadlifts), no crunches.
+   Exercises that did not change keep their key, so logged history still shows. */
 window.PROGRAM = [
  {
   "id": "day-a",
@@ -10,50 +15,42 @@ window.PROGRAM = [
   "kicker": "Day 1 — Monday",
   "title": "Chest lead",
   "sub": "Chest · back · biceps · triceps · quads",
-  "note": "Your heaviest pressing day. Bench goes first while you are completely fresh, because the weight you put on that bar is the single best predictor of whether your chest grows over the next few months.",
+  "note": "Back-safe version (Th11–12 disc). Start only once your physio or spine doctor clears you. Weeks 1–2: use about 50–60% of your old weights and leave 2–3 reps in the tank on every set. Every lift here has your back on a pad or a seat. Stop and call your doctor if you get numbness in the groin or saddle area, bladder or bowel changes, or weakness in your legs.",
   "ex": [
    {
-    "key": "day-a|barbell-bench-press",
-    "name": "Barbell bench press",
-    "rx": "4 sets × 5–8 reps",
-    "sets": 4,
-    "target": "5–8",
-    "restTxt": "rest 2–3 min",
-    "rest": 180,
-    "fr": [
-     "x0",
-     "x1"
-    ],
+    "key": "day-a|chest-press-machine",
+    "kind": "lift",
     "map": "--btriceps:#C3372A;--fchest:#C3372A;--ffrontdeltoids:#C3372A;--ftriceps:#C3372A",
-    "muscles": "Chest · triceps · front delts",
-    "cue": "Shoulder blades squeezed back and down into the bench, feet flat and pushing into the floor. Bar touches just below the nipples, elbows about 45° from your body — not flared straight out. Two lighter ramp-up sets first; they don't count as working sets.",
     "swaps": [
      {
-      "name": "Dumbbell bench press",
-      "why": "",
-      "fr": [
-       "x6",
-       "x7"
-      ]
-     },
-     {
-      "name": "Chest press machine",
-      "why": "",
-      "fr": [
-       "x8",
-       "x9"
-      ]
-     },
-     {
       "name": "Smith machine bench",
-      "why": "",
+      "why": "Set the safeties just above your chest. Back stays flat, no leg drive.",
       "fr": [
        "x10",
        "x11"
       ]
+     },
+     {
+      "name": "Dumbbell bench press",
+      "why": "Only if someone hands you the dumbbells. Kicking them up from your knees is the risky part.",
+      "fr": [
+       "x6",
+       "x7"
+      ]
      }
     ],
-    "kind": "lift"
+    "name": "Chest press machine",
+    "rx": "4 sets × 8–10 reps",
+    "sets": 4,
+    "target": "8–10",
+    "restTxt": "rest 2 min",
+    "rest": 120,
+    "fr": [
+     "x8",
+     "x9"
+    ],
+    "muscles": "Chest · triceps · front delts",
+    "cue": "Replaces the barbell bench for now: no unracking a heavy bar and no arching. Set the seat so the handles line up with mid-chest. Back flat against the pad and feet flat on the floor. If you have to arch away from the pad to finish a rep, the weight is too heavy."
    },
    {
     "key": "day-a|wide-grip-lat-pulldown",
@@ -69,16 +66,8 @@ window.PROGRAM = [
     ],
     "map": "--bupperback:#C3372A;--fbiceps:#E8A79B",
     "muscles": "Lats · upper back · biceps",
-    "cue": "Grip a little wider than your shoulders. Drive your elbows down toward your back pockets instead of pulling with your hands. Bar to the top of your chest, then control it all the way up until the lats stretch.",
+    "cue": "Thigh pad snug and torso almost upright, with only a small lean back. Drive your elbows down toward your back pockets and bring the bar to the top of your chest, then control it up. Don't rock your body to move the weight.",
     "swaps": [
-     {
-      "name": "Pull-up",
-      "why": "",
-      "fr": [
-       "x12",
-       "x13"
-      ]
-     },
      {
       "name": "Close-grip pulldown",
       "why": "",
@@ -101,9 +90,9 @@ window.PROGRAM = [
    {
     "key": "day-a|leg-press",
     "name": "Leg press",
-    "rx": "3 sets × 10–12 reps",
+    "rx": "3 sets × 12–15 reps",
     "sets": 3,
-    "target": "10–12",
+    "target": "12–15",
     "restTxt": "rest 2 min",
     "rest": 120,
     "fr": [
@@ -112,27 +101,11 @@ window.PROGRAM = [
     ],
     "map": "--bgluteal:#C3372A;--bhamstring:#E8A79B;--fquadriceps:#C3372A",
     "muscles": "Quads · glutes",
-    "cue": "Feet in the middle of the platform, about shoulder width. Lower until your knees are near your chest but stop before your lower back peels off the pad. One solid quad movement today, that's all legs need here.",
+    "cue": "Ask your physio before doing this one. Feet a bit higher on the platform, shoulder-width apart. Stop each rep BEFORE your hips start to curl up off the seat, even if that is only knees at about 90°. Lighter weight, more reps. If your physio says no, do the leg extension instead.",
     "swaps": [
      {
-      "name": "Hack squat machine",
-      "why": "",
-      "fr": [
-       "x20",
-       "x21"
-      ]
-     },
-     {
-      "name": "Goblet / dumbbell squat",
-      "why": "",
-      "fr": [
-       "x22",
-       "x23"
-      ]
-     },
-     {
       "name": "Leg extension",
-      "why": "",
+      "why": "Zero load on your spine. Use this if the leg press is off the table.",
       "fr": [
        "x24",
        "x25"
@@ -142,75 +115,59 @@ window.PROGRAM = [
     "kind": "lift"
    },
    {
-    "key": "day-a|incline-dumbbell-press",
-    "name": "Incline dumbbell press",
-    "rx": "3 sets × 8–12 reps",
-    "sets": 3,
-    "target": "8–12",
-    "restTxt": "rest 2 min",
-    "rest": 120,
-    "fr": [
-     "x34",
-     "x35"
-    ],
+    "key": "day-a|smith-incline-press",
+    "kind": "lift",
     "map": "--btriceps:#E8A79B;--fchest:#C3372A;--ffrontdeltoids:#C3372A;--ftriceps:#E8A79B",
-    "muscles": "Upper chest · front delts · triceps",
-    "cue": "Bench at around 30°, no steeper — past that it turns into a shoulder press. Lower until you feel a real stretch across the upper chest. This is the area that makes a chest look full in a t-shirt.",
     "swaps": [
      {
-      "name": "Incline barbell press",
+      "name": "Chest press machine",
       "why": "",
       "fr": [
-       "x28",
-       "x29"
-      ]
-     },
-     {
-      "name": "Smith incline press",
-      "why": "",
-      "fr": [
-       "x30",
-       "x31"
+       "x8",
+       "x9"
       ]
      },
      {
       "name": "Incline cable fly",
-      "why": "",
+      "why": "Lying on an incline bench, light.",
       "fr": [
        "x32",
        "x33"
       ]
      }
     ],
-    "kind": "lift"
+    "name": "Smith incline press",
+    "rx": "3 sets × 8–12 reps",
+    "sets": 3,
+    "target": "8–12",
+    "restTxt": "rest 2 min",
+    "rest": 120,
+    "fr": [
+     "x30",
+     "x31"
+    ],
+    "muscles": "Upper chest · front delts · triceps",
+    "cue": "Replaces incline dumbbells, so you don't have to swing heavy dumbbells up into position. Bench at about 30°, safeties set, back stays on the bench the whole set."
    },
    {
     "key": "day-a|dumbbell-lateral-raise",
-    "name": "Dumbbell lateral raise",
+    "name": "Seated dumbbell lateral raise",
     "rx": "3 sets × 12–20 reps",
     "sets": 3,
     "target": "12–20",
     "restTxt": "rest 60–75 s",
     "rest": 75,
     "fr": [
-     "x42",
-     "x43"
+     "x36",
+     "x37"
     ],
     "map": "--bbackdeltoids:#C3372A;--ffrontdeltoids:#C3372A",
     "muscles": "Side delts",
-    "cue": "Lighter than you think. Lead with the elbows, raise to shoulder height, lower over 3 seconds. Side delts are the cheapest width you can buy at your bodyweight — they make your shoulders look broad long before your chest does.",
+    "cue": "Now seated, so you can't swing the weight up with your back. Light dumbbells, lead with the elbows, raise to shoulder height, lower over 3 seconds. Pick the dumbbells up with bent knees and a straight back.",
     "swaps": [
      {
-      "name": "Seated lateral raise",
-      "why": "",
-      "fr": [
-       "x36",
-       "x37"
-      ]
-     },
-     {
       "name": "Cable lateral raise",
-      "why": "",
+      "why": "Stand tall, light weight.",
       "fr": [
        "x38",
        "x39"
@@ -241,24 +198,8 @@ window.PROGRAM = [
     ],
     "map": "--bforearm:#E8A79B;--fbiceps:#C3372A;--fforearm:#E8A79B",
     "muscles": "Biceps",
-    "cue": "Lie back on a 45–60° bench and let your arms hang straight down behind your torso. That stretched start is exactly why this builds more biceps than a standing curl. No swinging — if you need momentum, go lighter.",
+    "cue": "Kept because the bench supports your back. Lie back on a 45–60° bench and let your arms hang behind your torso. The risky part is getting the dumbbells: bend your knees with a straight back, then sit down holding them. No swinging.",
     "swaps": [
-     {
-      "name": "Standing dumbbell curl",
-      "why": "",
-      "fr": [
-       "x44",
-       "x45"
-      ]
-     },
-     {
-      "name": "Cable curl",
-      "why": "",
-      "fr": [
-       "x46",
-       "x47"
-      ]
-     },
      {
       "name": "Biceps curl machine",
       "why": "",
@@ -266,42 +207,23 @@ window.PROGRAM = [
        "x48",
        "x49"
       ]
+     },
+     {
+      "name": "Cable curl",
+      "why": "Light, stand tall, no leaning back.",
+      "fr": [
+       "x46",
+       "x47"
+      ]
      }
     ],
     "kind": "lift"
    },
    {
-    "key": "day-a|one-arm-dumbbell-triceps-extension",
-    "name": "One-arm dumbbell triceps extension",
-    "rx": "3 sets × 10–12 reps",
-    "sets": 3,
-    "target": "10–12",
-    "restTxt": "rest 60–75 s",
-    "rest": 75,
-    "fr": [
-     "x58",
-     "x59"
-    ],
+    "key": "day-a|skull-crusher",
+    "kind": "lift",
     "map": "--btriceps:#C3372A;--ftriceps:#C3372A",
-    "muscles": "Triceps, long head",
-    "cue": "One dumbbell, straight overhead, lower it behind your head until you feel the back of the arm stretch. Your elbow points at the ceiling and stays there — only the forearm moves. Overhead is what loads the long head, and the long head is the mass of your arm seen from the side.",
     "swaps": [
-     {
-      "name": "Overhead rope extension",
-      "why": "",
-      "fr": [
-       "x52",
-       "x53"
-      ]
-     },
-     {
-      "name": "Skull crusher",
-      "why": "",
-      "fr": [
-       "x54",
-       "x55"
-      ]
-     },
      {
       "name": "Triceps machine",
       "why": "",
@@ -309,39 +231,58 @@ window.PROGRAM = [
        "x56",
        "x57"
       ]
+     },
+     {
+      "name": "V-bar pushdown",
+      "why": "",
+      "fr": [
+       "x106",
+       "x107"
+      ]
      }
     ],
-    "kind": "lift"
+    "name": "Skull crusher (lying EZ-bar extension)",
+    "rx": "3 sets × 10–12 reps",
+    "sets": 3,
+    "target": "10–12",
+    "restTxt": "rest 60–75 s",
+    "rest": 75,
+    "fr": [
+     "x54",
+     "x55"
+    ],
+    "muscles": "Triceps, long head",
+    "cue": "Replaces the overhead one-arm extension. Lying on a flat bench, lower the bar to just behind your head. That still stretches the long head, and the bench holds your spine. Reaching overhead while standing or sitting upright tends to arch the lower back."
    },
    {
-    "key": "day-a|abs-hanging-knee-leg-raise",
-    "name": "Hanging knee / leg raise",
-    "rx": "3 sets × 10–15 reps",
+    "key": "day-a|abs-dead-bug",
+    "name": "Dead bug",
+    "rx": "3 sets × 8–10 reps",
     "sets": 3,
-    "target": "10–15",
-    "restTxt": "rest 60 s",
+    "target": "8–10",
+    "restTxt": "rest 45–60 s",
     "rest": 60,
     "fr": null,
     "map": "",
-    "muscles": "Abs",
-    "cue": "",
+    "muscles": "Core",
+    "cue": "Reps per side. Lie on your back with arms up and knees bent at 90°. Press your lower back into the floor and keep it there while you slowly reach the opposite arm and leg out. Replaces hanging raises.",
     "swaps": [],
     "kind": "core"
    },
    {
-    "key": "day-a|abs-cable-crunch",
-    "name": "Cable crunch",
-    "rx": "3 sets × 12–15 reps",
+    "key": "day-a|abs-side-plank",
+    "name": "Side plank",
+    "rx": "3 sets × 20–30 s",
     "sets": 3,
-    "target": "12–15",
-    "restTxt": "rest 60 s",
+    "target": "20–30",
+    "restTxt": "rest 45–60 s",
     "rest": 60,
     "fr": null,
     "map": "",
-    "muscles": "Abs",
-    "cue": "",
+    "muscles": "Core",
+    "cue": "Seconds per side. Start from your knees and move to your feet when it gets easy. Body in a straight line, hips up. Replaces cable crunches.",
     "swaps": [],
-    "kind": "core"
+    "kind": "secs"
    }
   ]
  },
@@ -352,65 +293,14 @@ window.PROGRAM = [
   "kicker": "Day 2 — Wednesday",
   "title": "Back and legs lead",
   "sub": "Back · legs · shoulders · chest · arms",
-  "note": "The hardest of the three. Heavy squatting and rowing are what make the rest of your body catch up to your arms — and they raise your appetite, which matters when your job is to gain weight.",
+  "note": "This day changed the most. The Smith squat is gone, because a bar on your shoulders compresses the spine right where your disc is. Back work is fully chest-supported now, and legs get trained with machines that load the legs without the spine. Expect slower leg gains for a while. That's a fair trade.",
   "ex": [
-   {
-    "key": "day-b|smith-machine-squat",
-    "name": "Smith machine squat",
-    "rx": "4 sets × 6–10 reps",
-    "sets": 4,
-    "target": "6–10",
-    "restTxt": "rest 3 min",
-    "rest": 180,
-    "fr": [
-     "x2",
-     "x3"
-    ],
-    "map": "--bgluteal:#C3372A;--bhamstring:#E8A79B;--blowerback:#E8A79B;--fquadriceps:#C3372A",
-    "muscles": "Quads · glutes",
-    "cue": "Yes — this is the one you described, and it is a perfectly good place to start. The bar runs on rails so it only travels up and down, and on most Smith machines the bar is counterbalanced to roughly 7–15 kg instead of 20, so the plates on it are not comparable to a free bar. Set your feet slightly forward of the bar, sit down between your hips, go as deep as you can without your lower back rounding.",
-    "swaps": [
-     {
-      "name": "Hack squat machine",
-      "why": "",
-      "fr": [
-       "x20",
-       "x21"
-      ]
-     },
-     {
-      "name": "Free barbell squat",
-      "why": "",
-      "fr": [
-       "x64",
-       "x65"
-      ]
-     },
-     {
-      "name": "Leg press",
-      "why": "",
-      "fr": [
-       "x26",
-       "x27"
-      ]
-     },
-     {
-      "name": "Goblet squat",
-      "why": "",
-      "fr": [
-       "x66",
-       "x67"
-      ]
-     }
-    ],
-    "kind": "lift"
-   },
    {
     "key": "day-b|chest-supported-t-bar-row",
     "name": "Chest-supported T-bar row",
-    "rx": "4 sets × 8–10 reps",
+    "rx": "4 sets × 10–12 reps",
     "sets": 4,
-    "target": "8–10",
+    "target": "10–12",
     "restTxt": "rest 2 min",
     "rest": 120,
     "fr": [
@@ -419,77 +309,80 @@ window.PROGRAM = [
     ],
     "map": "--bbackdeltoids:#E8A79B;--bupperback:#C3372A;--fbiceps:#E8A79B",
     "muscles": "Mid back · lats · biceps",
-    "cue": "Chest flat on the pad so your lower back does nothing. Let the weight pull your shoulder blades forward at the bottom, then drive your elbows back and squeeze for a beat. Because you are braced, you can take these genuinely close to failure — that is the whole advantage over a bent-over row.",
+    "cue": "Kept because your chest stays on the pad and your lower back does nothing. Two things to watch: load the plates with bent knees and a straight back, and climb on and off carefully. If getting on the machine bothers your back, use the machine row instead.",
     "swaps": [
      {
       "name": "Chest-supported machine row",
-      "why": "",
+      "why": "Easiest to get in and out of.",
       "fr": [
        "x68",
        "x69"
       ]
      },
      {
-      "name": "Dumbbell row",
+      "name": "Close-grip pulldown",
       "why": "",
       "fr": [
-       "x70",
-       "x71"
-      ]
-     },
-     {
-      "name": "Bent-over barbell row",
-      "why": "",
-      "fr": [
-       "x72",
-       "x73"
+       "x14",
+       "x15"
       ]
      }
     ],
     "kind": "lift"
    },
    {
-    "key": "day-b|seated-dumbbell-shoulder-press",
-    "name": "Seated dumbbell shoulder press",
-    "rx": "3 sets × 6–10 reps",
-    "sets": 3,
-    "target": "6–10",
-    "restTxt": "rest 2 min",
-    "rest": 120,
-    "fr": [
-     "x82",
-     "x83"
-    ],
-    "map": "--bbackdeltoids:#C3372A;--btriceps:#E8A79B;--ffrontdeltoids:#C3372A;--ftriceps:#E8A79B",
-    "muscles": "Front and side delts · triceps",
-    "cue": "Press slightly in front of your ears, never behind your head. Stop just short of lockout so the delts keep the tension. Back flat against the bench — no arching it into an incline press.",
+    "key": "day-b|leg-extension",
+    "kind": "lift",
+    "map": "--fquadriceps:#C3372A",
     "swaps": [
      {
-      "name": "Barbell overhead press",
-      "why": "",
+      "name": "Leg press",
+      "why": "Only once your physio is fine with it, and only to the depth where your hips stay on the seat.",
       "fr": [
-       "x76",
-       "x77"
-      ]
-     },
-     {
-      "name": "Shoulder press machine",
-      "why": "",
-      "fr": [
-       "x78",
-       "x79"
-      ]
-     },
-     {
-      "name": "Smith overhead press",
-      "why": "",
-      "fr": [
-       "x80",
-       "x81"
+       "x26",
+       "x27"
       ]
      }
     ],
-    "kind": "lift"
+    "name": "Leg extension",
+    "rx": "4 sets × 12–15 reps",
+    "sets": 4,
+    "target": "12–15",
+    "restTxt": "rest 90 s",
+    "rest": 90,
+    "fr": [
+     "x24",
+     "x25"
+    ],
+    "muscles": "Quads",
+    "cue": "Replaces the Smith squat for now. Back against the pad, hold the handles, one-second squeeze at the top, slow on the way down. No spinal load at all."
+   },
+   {
+    "key": "day-b|shoulder-press-machine",
+    "kind": "lift",
+    "map": "--bbackdeltoids:#C3372A;--btriceps:#E8A79B;--ffrontdeltoids:#C3372A;--ftriceps:#E8A79B",
+    "swaps": [
+     {
+      "name": "Seated lateral raise",
+      "why": "Use this if overhead pressing irritates your back.",
+      "fr": [
+       "x36",
+       "x37"
+      ]
+     }
+    ],
+    "name": "Shoulder press machine",
+    "rx": "3 sets × 10–12 reps",
+    "sets": 3,
+    "target": "10–12",
+    "restTxt": "rest 2 min",
+    "rest": 120,
+    "fr": [
+     "x78",
+     "x79"
+    ],
+    "muscles": "Front and side delts · triceps",
+    "cue": "Replaces seated dumbbell presses: no swinging dumbbells up to your shoulders. Back fully against the upright pad. If your lower back arches away from the pad, the weight is too heavy. If any overhead pressing bothers your back, skip it and do lateral raises instead."
    },
    {
     "key": "day-b|pec-deck-machine-fly",
@@ -509,77 +402,42 @@ window.PROGRAM = [
     "swaps": [
      {
       "name": "Cable fly",
-      "why": "",
+      "why": "Light, staggered stance, torso still.",
       "fr": [
        "x84",
        "x85"
-      ]
-     },
-     {
-      "name": "Dumbbell fly",
-      "why": "",
-      "fr": [
-       "x86",
-       "x87"
-      ]
-     },
-     {
-      "name": "Low-to-high cable fly",
-      "why": "",
-      "fr": [
-       "x32",
-       "x33"
       ]
      }
     ],
     "kind": "lift"
    },
    {
-    "key": "day-b|lying-leg-curl",
-    "name": "Lying leg curl",
+    "key": "day-b|seated-leg-curl",
+    "kind": "lift",
+    "map": "--bcalves:#E8A79B;--bhamstring:#C3372A;--bleftsoleus:#E8A79B;--brightsoleus:#E8A79B;--fcalves:#E8A79B",
+    "swaps": [
+     {
+      "name": "Glute bridge",
+      "why": "Bodyweight on the floor. Lift only until hips and thighs make a line, then stop.",
+      "fr": null
+     }
+    ],
+    "name": "Seated leg curl",
     "rx": "3 sets × 10–12 reps",
     "sets": 3,
     "target": "10–12",
     "restTxt": "rest 90 s",
     "rest": 90,
     "fr": [
-     "x96",
-     "x97"
+     "x92",
+     "x93"
     ],
-    "map": "--bcalves:#E8A79B;--bgluteal:#E8A79B;--bhamstring:#C3372A;--bleftsoleus:#E8A79B;--brightsoleus:#E8A79B;--fcalves:#E8A79B",
     "muscles": "Hamstrings",
-    "cue": "Squats barely work the hamstrings, so they need their own movement. Three seconds on the way back down — the lowering half is where hamstrings grow. One thing to know: with the Romanian deadlift gone, this plan has no hip hinge left in it, so if you want your glutes and lower back covered, the back extension below is the swap to make here.",
-    "swaps": [
-     {
-      "name": "Back extension",
-      "why": "",
-      "fr": [
-       "x90",
-       "x91"
-      ]
-     },
-     {
-      "name": "Seated leg curl",
-      "why": "",
-      "fr": [
-       "x92",
-       "x93"
-      ]
-     },
-     {
-      "name": "Hip thrust",
-      "why": "",
-      "fr": [
-       "x94",
-       "x95"
-      ]
-     }
-    ],
-    "kind": "lift"
+    "cue": "Replaces the lying leg curl. Lying face-down tends to arch your lower back as you curl; the seated version doesn't. Three seconds lowering. Back extensions and hip thrusts are off the list for now."
    },
    {
     "key": "day-b|hammer-curl",
-    "name": "Hammer curl",
+    "name": "Seated hammer curl",
     "rx": "3 sets × 8–12 reps",
     "sets": 3,
     "target": "8–12",
@@ -591,30 +449,22 @@ window.PROGRAM = [
     ],
     "map": "--bforearm:#C3372A;--fbiceps:#C3372A;--fforearm:#C3372A",
     "muscles": "Biceps · brachialis · forearms",
-    "cue": "Neutral grip, thumbs up. This hits the brachialis, the muscle sitting underneath the biceps — it pushes the biceps up and makes your arm look wider from the front. It builds forearms too.",
+    "cue": "Now seated, with your back against an upright bench, so your spine isn't holding the weight while you stand. Neutral grip, thumbs up. This hits the brachialis, which pushes the biceps up and makes your arm look wider from the front.",
     "swaps": [
      {
       "name": "Rope hammer curl",
-      "why": "",
+      "why": "Light, stand tall, no swinging.",
       "fr": [
        "x98",
        "x99"
       ]
      },
      {
-      "name": "Cross-body hammer curl",
+      "name": "Biceps curl machine",
       "why": "",
       "fr": [
-       "x100",
-       "x101"
-      ]
-     },
-     {
-      "name": "EZ-bar curl",
-      "why": "",
-      "fr": [
-       "x102",
-       "x103"
+       "x48",
+       "x49"
       ]
      }
     ],
@@ -634,7 +484,7 @@ window.PROGRAM = [
     ],
     "map": "--btriceps:#C3372A;--ftriceps:#C3372A",
     "muscles": "Triceps",
-    "cue": "Elbows pinned to your ribs. Spread the rope apart at the bottom and hold the lockout for a beat. Control the way up instead of letting the stack yank your arms.",
+    "cue": "Stand tall with a soft knee bend, elbows pinned to your ribs. Don't lean over the stack to push more weight. Spread the rope apart at the bottom and control the way up.",
     "swaps": [
      {
       "name": "V-bar pushdown",
@@ -646,18 +496,10 @@ window.PROGRAM = [
      },
      {
       "name": "Dip machine",
-      "why": "",
+      "why": "The seated machine version, not free dips.",
       "fr": [
        "x108",
        "x109"
-      ]
-     },
-     {
-      "name": "Bench dip",
-      "why": "",
-      "fr": [
-       "x110",
-       "x111"
       ]
      }
     ],
@@ -681,18 +523,10 @@ window.PROGRAM = [
     "swaps": [
      {
       "name": "Face pull",
-      "why": "",
+      "why": "Light, staggered stance, torso still.",
       "fr": [
        "x114",
        "x115"
-      ]
-     },
-     {
-      "name": "Bent-over dumbbell reverse fly",
-      "why": "",
-      "fr": [
-       "x116",
-       "x117"
       ]
      },
      {
@@ -709,30 +543,30 @@ window.PROGRAM = [
    {
     "key": "day-b|abs-plank",
     "name": "Plank",
-    "rx": "3 sets × 40–60 s",
+    "rx": "3 sets × 20–40 s",
     "sets": 3,
-    "target": "40–60",
+    "target": "20–40",
     "restTxt": "rest 60 s",
     "rest": 60,
     "fr": null,
     "map": "",
     "muscles": "Abs",
-    "cue": "",
+    "cue": "Forearms down, glutes squeezed, body in a straight line. Don't let your hips sag. Start at 20 seconds and build up.",
     "swaps": [],
     "kind": "secs"
    },
    {
-    "key": "day-b|abs-reverse-crunch",
-    "name": "Reverse crunch",
-    "rx": "3 sets × 12–15 reps",
+    "key": "day-b|abs-bird-dog",
+    "name": "Bird dog",
+    "rx": "3 sets × 8 reps",
     "sets": 3,
-    "target": "12–15",
-    "restTxt": "rest 60 s",
+    "target": "8",
+    "restTxt": "rest 45–60 s",
     "rest": 60,
     "fr": null,
     "map": "",
-    "muscles": "Abs",
-    "cue": "",
+    "muscles": "Core",
+    "cue": "Reps per side. On hands and knees, reach the opposite arm and leg out, hold 3 seconds, and keep your hips level, as if a glass of water were on your lower back. Replaces reverse crunches.",
     "swaps": [],
     "kind": "core"
    }
@@ -745,30 +579,19 @@ window.PROGRAM = [
   "kicker": "Day 3 — Friday",
   "title": "Arms lead",
   "sub": "Arms · chest · back · hamstrings · calves",
-  "note": "The day built around what you actually care about. Chest gets a third angle, then arms get real volume while you still have energy for them instead of getting the scraps at the end.",
+  "note": "Still the day built around your arms. Standing barbell work moves to Smith, machine and preacher versions, so your biceps and triceps get the same work and your spine gets far less. If your back feels worse the morning after a session, repeat those weights next time instead of adding more.",
   "ex": [
    {
-    "key": "day-c|incline-barbell-bench-press",
-    "name": "Incline barbell bench press",
-    "rx": "4 sets × 6–10 reps",
-    "sets": 4,
-    "target": "6–10",
-    "restTxt": "rest 2–3 min",
-    "rest": 180,
-    "fr": [
-     "x28",
-     "x29"
-    ],
-    "map": "--btriceps:#E8A79B;--fchest:#C3372A;--ffrontdeltoids:#C3372A;--ftriceps:#E8A79B",
-    "muscles": "Upper chest · front delts · triceps",
-    "cue": "Third chest session this week, third angle. Bench at about 30°, bar touches high on the chest just below the collarbones. Slightly higher reps than Monday because you are already carrying fatigue.",
+    "key": "day-c|smith-machine-bench",
+    "kind": "lift",
+    "map": "--btriceps:#C3372A;--fchest:#C3372A;--ffrontdeltoids:#C3372A;--ftriceps:#C3372A",
     "swaps": [
      {
-      "name": "Incline dumbbell press",
+      "name": "Chest press machine",
       "why": "",
       "fr": [
-       "x34",
-       "x35"
+       "x8",
+       "x9"
       ]
      },
      {
@@ -778,146 +601,117 @@ window.PROGRAM = [
        "x30",
        "x31"
       ]
+     }
+    ],
+    "name": "Smith machine bench",
+    "rx": "4 sets × 8–10 reps",
+    "sets": 4,
+    "target": "8–10",
+    "restTxt": "rest 2 min",
+    "rest": 120,
+    "fr": [
+     "x10",
+     "x11"
+    ],
+    "muscles": "Chest · triceps · front delts",
+    "cue": "Replaces the incline barbell bench. Flat this time, because Monday covers the incline. Safeties set just above your chest, back on the bench, and don't drive off the floor with your legs."
+   },
+   {
+    "key": "day-c|smith-close-grip-press",
+    "kind": "lift",
+    "map": "--btriceps:#C3372A;--fchest:#E8A79B;--ffrontdeltoids:#E8A79B;--ftriceps:#C3372A",
+    "swaps": [
+     {
+      "name": "Assisted dip machine",
+      "why": "Kneeling on the pad keeps you steady. No free dips for now.",
+      "fr": [
+       "x108",
+       "x109"
+      ]
      },
      {
-      "name": "Chest press machine",
+      "name": "Triceps machine",
       "why": "",
       "fr": [
-       "x8",
-       "x9"
+       "x56",
+       "x57"
       ]
      }
     ],
-    "kind": "lift"
-   },
-   {
-    "key": "day-c|close-grip-bench-press",
-    "name": "Close-grip bench press",
+    "name": "Smith close-grip press",
     "rx": "3 sets × 8–10 reps",
     "sets": 3,
     "target": "8–10",
     "restTxt": "rest 2 min",
     "rest": 120,
     "fr": [
-     "x130",
-     "x131"
+     "x128",
+     "x129"
     ],
-    "map": "--btriceps:#C3372A;--fchest:#E8A79B;--ffrontdeltoids:#E8A79B;--ftriceps:#C3372A",
     "muscles": "Triceps · chest · front delts",
-    "cue": "Hands about shoulder-width, elbows tucked tight to your sides. The heaviest triceps movement that exists, and triceps are roughly two thirds of your arm — for arm size this matters more than any curl.",
-    "swaps": [
-     {
-      "name": "Triceps dip",
-      "why": "",
-      "fr": [
-       "x126",
-       "x127"
-      ]
-     },
-     {
-      "name": "Smith close-grip press",
-      "why": "",
-      "fr": [
-       "x128",
-       "x129"
-      ]
-     },
-     {
-      "name": "Assisted dip machine",
-      "why": "",
-      "fr": [
-       "x108",
-       "x109"
-      ]
-     }
-    ],
-    "kind": "lift"
+    "cue": "Same movement as before, on the Smith machine with safeties set, so you never have to wrestle a heavy bar back into the rack. Hands at shoulder width, elbows tucked."
    },
    {
-    "key": "day-c|barbell-curl",
-    "name": "Barbell curl",
-    "rx": "4 sets × 8–10 reps",
-    "sets": 4,
-    "target": "8–10",
-    "restTxt": "rest 90 s",
-    "rest": 90,
-    "fr": [
-     "x4",
-     "x5"
-    ],
+    "key": "day-c|biceps-curl-machine",
+    "kind": "lift",
     "map": "--bforearm:#E8A79B;--fbiceps:#C3372A;--fforearm:#E8A79B",
-    "muscles": "Biceps",
-    "cue": "Elbows glued to your sides, no leaning back to heave it up. Two full seconds lowering. Four sets because this is your priority — treat it as seriously as you treat the bench.",
     "swaps": [
      {
-      "name": "EZ-bar curl",
+      "name": "Dumbbell preacher curl",
       "why": "",
       "fr": [
-       "x102",
-       "x103"
-      ]
-     },
-     {
-      "name": "Dumbbell curl",
-      "why": "",
-      "fr": [
-       "x44",
-       "x45"
+       "x140",
+       "x141"
       ]
      },
      {
       "name": "Cable curl",
-      "why": "",
+      "why": "Light, stand tall, no leaning back.",
       "fr": [
        "x46",
        "x47"
       ]
      }
     ],
-    "kind": "lift"
+    "name": "Biceps curl machine",
+    "rx": "4 sets × 8–10 reps",
+    "sets": 4,
+    "target": "8–10",
+    "restTxt": "rest 90 s",
+    "rest": 90,
+    "fr": [
+     "x48",
+     "x49"
+    ],
+    "muscles": "Biceps",
+    "cue": "Replaces the standing barbell curl. The urge to lean back and heave a heavy barbell up is exactly what loads your spine. Here you're seated with your arms on a pad, so all of the effort goes into the biceps. Still four sets: arms are your priority."
    },
    {
-    "key": "day-c|seated-cable-row",
-    "name": "Seated cable row",
-    "rx": "3 sets × 10–12 reps",
-    "sets": 3,
-    "target": "10–12",
-    "restTxt": "rest 2 min",
-    "rest": 120,
-    "fr": [
-     "x136",
-     "x137"
-    ],
+    "key": "day-c|chest-supported-machine-row",
+    "kind": "lift",
     "map": "--bbackdeltoids:#E8A79B;--bupperback:#C3372A;--fbiceps:#E8A79B",
-    "muscles": "Mid back · lats · biceps",
-    "cue": "Chest tall, no rocking backwards. Let the weight pull your shoulder blades forward at the front of each rep, then pull the handle into your stomach and pause a second.",
     "swaps": [
      {
-      "name": "One-arm dumbbell row",
+      "name": "Close-grip pulldown",
       "why": "",
       "fr": [
-       "x132",
-       "x133"
-      ]
-     },
-     {
-      "name": "Machine row",
-      "why": "",
-      "fr": [
-       "x68",
-       "x69"
-      ]
-     },
-     {
-      "name": "Inverted row",
-      "why": "",
-      "fr": [
-       "x134",
-       "x135"
+       "x14",
+       "x15"
       ]
      }
     ],
-    "kind": "lift"
+    "name": "Chest-supported machine row",
+    "rx": "3 sets × 10–12 reps",
+    "sets": 3,
+    "target": "10–12",
+    "restTxt": "rest 90 s",
+    "rest": 90,
+    "fr": [
+     "x68",
+     "x69"
+    ],
+    "muscles": "Mid back · lats · biceps",
+    "cue": "Replaces the seated cable row. On a cable row your lower back has to hold your torso still; here the chest pad does that job. Chest stays on the pad for the whole set, squeeze for a beat at the back."
    },
    {
     "key": "day-c|seated-leg-curl",
@@ -936,28 +730,9 @@ window.PROGRAM = [
     "cue": "Hips bent in the seat put the hamstrings on stretch before the rep even starts, which is why the seated version slightly beats the lying one. Three seconds lowering, no bouncing out of the bottom.",
     "swaps": [
      {
-      "name": "Lying leg curl",
-      "why": "",
-      "fr": [
-       "x96",
-       "x97"
-      ]
-     },
-     {
-      "name": "Romanian deadlift",
-      "why": "",
-      "fr": [
-       "x138",
-       "x139"
-      ]
-     },
-     {
-      "name": "Back extension",
-      "why": "",
-      "fr": [
-       "x90",
-       "x91"
-      ]
+      "name": "Glute bridge",
+      "why": "Bodyweight on the floor. Lift only until hips and thighs make a line, then stop.",
+      "fr": null
      }
     ],
     "kind": "lift"
@@ -993,131 +768,91 @@ window.PROGRAM = [
        "x142",
        "x143"
       ]
-     },
-     {
-      "name": "Concentration curl",
-      "why": "",
-      "fr": [
-       "x144",
-       "x145"
-      ]
      }
     ],
     "kind": "lift"
    },
    {
     "key": "day-c|dumbbell-lateral-raise",
-    "name": "Dumbbell lateral raise",
+    "name": "Seated dumbbell lateral raise",
     "rx": "3 sets × 12–20 reps",
     "sets": 3,
     "target": "12–20",
     "restTxt": "rest 60 s",
     "rest": 60,
     "fr": [
-     "x42",
-     "x43"
+     "x36",
+     "x37"
     ],
     "map": "--bbackdeltoids:#C3372A;--ffrontdeltoids:#C3372A",
     "muscles": "Side delts",
-    "cue": "Second side-delt session of the week, deliberately at the end when you are tired. Twice a week on a small movement like this is not too much — side delts recover fast and respond well to frequency. Go light, raise to shoulder height, lower slowly.",
+    "cue": "Seated, so the back stays out of it. Second side-delt session of the week. Go light, raise to shoulder height, lower slowly.",
     "swaps": [
      {
-      "name": "Seated lateral raise",
-      "why": "",
+      "name": "Cable lateral raise",
+      "why": "Stand tall, light weight.",
       "fr": [
-       "x36",
-       "x37"
-      ]
-     },
-     {
-      "name": "Upright row",
-      "why": "",
-      "fr": [
-       "x148",
-       "x149"
-      ]
-     },
-     {
-      "name": "Front raise",
-      "why": "",
-      "fr": [
-       "x150",
-       "x151"
+       "x38",
+       "x39"
       ]
      }
     ],
     "kind": "lift"
    },
    {
-    "key": "day-c|standing-calf-raise",
-    "name": "Standing calf raise",
-    "rx": "3 sets × 10–15 reps",
-    "sets": 3,
-    "target": "10–15",
-    "restTxt": "rest 60 s",
-    "rest": 60,
-    "fr": [
-     "x158",
-     "x159"
-    ],
+    "key": "day-c|seated-calf-raise",
+    "kind": "lift",
     "map": "--bcalves:#C3372A;--bleftsoleus:#C3372A;--brightsoleus:#C3372A;--fcalves:#C3372A",
-    "muscles": "Calves",
-    "cue": "Full stretch at the bottom, one-second squeeze at the top, no bouncing. Calves need the pause more than they need weight.",
     "swaps": [
      {
       "name": "Calf press on leg press",
-      "why": "",
+      "why": "Only if the leg press is cleared for you.",
       "fr": [
        "x152",
        "x153"
       ]
-     },
-     {
-      "name": "Dumbbell calf raise",
-      "why": "",
-      "fr": [
-       "x154",
-       "x155"
-      ]
-     },
-     {
-      "name": "Seated calf raise",
-      "why": "",
-      "fr": [
-       "x156",
-       "x157"
-      ]
      }
     ],
-    "kind": "lift"
-   },
-   {
-    "key": "day-c|abs-decline-crunch",
-    "name": "Decline crunch",
+    "name": "Seated calf raise",
     "rx": "3 sets × 12–15 reps",
     "sets": 3,
     "target": "12–15",
     "restTxt": "rest 60 s",
     "rest": 60,
+    "fr": [
+     "x156",
+     "x157"
+    ],
+    "muscles": "Calves",
+    "cue": "Replaces the standing calf raise, whose shoulder pads push the weight straight down through your spine. The seated machine loads your knees instead. Full stretch at the bottom, one-second squeeze at the top."
+   },
+   {
+    "key": "day-c|abs-pallof-press",
+    "name": "Pallof press",
+    "rx": "3 sets × 10 reps",
+    "sets": 3,
+    "target": "10",
+    "restTxt": "rest 45–60 s",
+    "rest": 60,
     "fr": null,
     "map": "",
-    "muscles": "Abs",
-    "cue": "",
+    "muscles": "Core",
+    "cue": "Reps per side. Stand side-on to a cable at chest height, press the handle straight out and hold 2 seconds without letting it twist you. Trains the core to keep your spine still. Replaces decline crunches.",
     "swaps": [],
     "kind": "core"
    },
    {
-    "key": "day-c|abs-lying-leg-raise",
-    "name": "Lying leg raise",
-    "rx": "3 sets × 12–15 reps",
+    "key": "day-c|abs-dead-bug",
+    "name": "Dead bug",
+    "rx": "3 sets × 8–10 reps",
     "sets": 3,
-    "target": "12–15",
-    "restTxt": "rest 60 s",
+    "target": "8–10",
+    "restTxt": "rest 45–60 s",
     "rest": 60,
     "fr": null,
     "map": "",
-    "muscles": "Abs",
-    "cue": "",
+    "muscles": "Core",
+    "cue": "Reps per side. Lower back pressed into the floor the whole time. Replaces lying leg raises, which tend to pull the lower back into an arch.",
     "swaps": [],
     "kind": "core"
    }
